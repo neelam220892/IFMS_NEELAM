@@ -1,0 +1,18 @@
+.container1{
+    /* overflow-y: scroll; */
+    /* height: 72vh; */
+
+}
+
+.dateinput{
+    width:90% !important;
+}
+.mat-radio-group{
+    display:flex ;
+    width: 60%;
+    font-size:0.9em;
+    justify-content: space-between;
+    margin-bottom: 2%;
+    margin-left: 8%;
+    margin-top: 1%;
+  }

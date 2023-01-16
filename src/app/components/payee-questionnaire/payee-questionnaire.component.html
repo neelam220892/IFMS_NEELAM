@@ -1,0 +1,30 @@
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+
+    <mat-card class="box">
+        <mat-card-header>
+          <mat-card-title>DO you have Pan-Card</mat-card-title>
+        </mat-card-header>
+        <div  style="margin-top: 3%; margin-left: 0.5%;">
+         
+            <mat-radio-group matNativeControl aria-label="Pan card"  [(ngModel)]="IsPanCard" [ngModelOptions]="{standalone: true}">
+                <mat-radio-button color="primary" value="Yes" (change)="onSelectPanCard($event)">Yes</mat-radio-button>
+                <mat-radio-button color="primary" value="No" (change)="onSelectPanCard($event)">No</mat-radio-button>
+              </mat-radio-group>     
+          
+      </div>
+      <div *ngIf="IsPanCard == 'Yes'">
+          <mat-form-field style="width: 85%;margin-top: 3%;margin-left: 5%;" >
+              <mat-label>Pan No.</mat-label>
+              <input matInput type="text" placeholder="Ex. EXCPS4627A" [(ngModel)]="panNo" [ngModelOptions]="{standalone: true}" (ngModelChange)="PanService()">
+                </mat-form-field>
+            
+            <mat-icon [ngStyle]="{'color':'green'}">check_circle</mat-icon>
+      </div>  
+      <div class="float-start"style="margin-bottom: 2%;margin-top:10%">
+          <button class="btn btn-primary" mat-raised-button color="primary" >Previous</button> 
+      </div>
+      <div class="float-end" style="margin-top:10%"> 
+          <button class="btn btn-secondary ms-2" mat-raised-button color="secondary" >Next</button>
+      </div>
+    </mat-card>
+  </div>

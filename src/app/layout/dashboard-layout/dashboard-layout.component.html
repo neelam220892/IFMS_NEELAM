@@ -1,0 +1,17 @@
+<app-header></app-header>
+ <!-- ======= Sidebar ======= -->
+ <mat-drawer-container class="example-container" autosize>
+    <mat-drawer #drawer opened class="example-sidenav" mode="side">
+        <app-togglesidemenu></app-togglesidemenu>
+    </mat-drawer>
+    <button type="button" mat-button (click)="drawer.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <div class="example-sidenav-content">
+      <router-outlet></router-outlet>
+    </div>
+  
+  </mat-drawer-container>
+  <!-- End Sidebar-->
+
+<app-footer></app-footer>
