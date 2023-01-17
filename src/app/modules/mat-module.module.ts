@@ -20,6 +20,9 @@ import { MatSelect, MatSelectModule } from '@angular/material/select';
 import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatNativeDateModule} from '@angular/material/core';
+import { MatMomentDateModule } from "@angular/material-moment-adapter";
 const Mat = [
   MatCheckboxModule,
   MatSelectModule,
@@ -40,7 +43,10 @@ const Mat = [
   MatSidenavModule,
   MatSortModule,
   MatPaginatorModule,
-  MatFormFieldModule
+  MatFormFieldModule,
+  MatNativeDateModule,
+  MatMomentDateModule,
+  MatTabsModule,
 ]
 @NgModule({
   declarations: [],

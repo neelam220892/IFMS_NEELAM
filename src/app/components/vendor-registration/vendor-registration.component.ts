@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTabChangeEvent } from '@angular/material/tabs';
-import { VendorSubmitDialogComponent } from 'src/app/vendor-submit-dialog/vendor-submit-dialog.component';
+import { VendorSubmitDialogComponent } from 'src/app/shared/vendor-submit-dialog/vendor-submit-dialog.component';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { Console } from 'console';
 

@@ -4,11 +4,11 @@ import { UserSessions } from 'src/app/model/user';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { MatRadioChange } from '@angular/material/radio';
-import { VendorSubmitDialogComponent } from 'src/app/vendor-submit-dialog/vendor-submit-dialog.component';
+import { VendorSubmitDialogComponent } from 'src/app/shared/vendor-submit-dialog/vendor-submit-dialog.component';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms'
 import { EncrDecrService } from 'src/app/services/encr-decr.service';
 import { AppConfig } from 'src/app/app.config';
-import { ThisReceiver } from '@angular/compiler';
+import { OtpWindowComponent } from '../../shared/otp-window/otp-window.component';
 @Component({
   selector: 'app-payee-registration',
   templateUrl: './payee-registration.component.html',
@@ -364,5 +364,9 @@ public previousStep() {
       this.dialog.open(VendorSubmitDialogComponent,{ panelClass: 'dialog-w-30'});
     }
   }
-
+  openOtpModal() {
+    // this.display = "block";
+    const dialogRef = this.dialog.open(OtpWindowComponent,{ panelClass: 'dialog-w-30'});
+    return dialogRef.afterClosed();
+  }
 }

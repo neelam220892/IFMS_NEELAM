@@ -5,10 +5,11 @@
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <nav _ngcontent-usv-c162="" aria-label="breadcrumb">
                     <ol _ngcontent-usv-c162="" class="breadcrumb">
-                        <li _ngcontent-usv-c162="" class="breadcrumb-item"><a _ngcontent-usv-c162=""
-                                routerlink="/login" ng-reflect-router-link="/login" href="/">Login</a> </li>
+                        <li _ngcontent-usv-c162="" class="breadcrumb-item"><a _ngcontent-usv-c162="" routerlink="/login" ng-reflect-router-link="/login" href="/">Login</a> 
+                        </li>
                         <li _ngcontent-usv-c162="" aria-current="Inbox" aria-label="Current Page" class="breadcrumb-item active">
-                            Payee</li>
+                            Payee
+                        </li>
                     </ol>
                 </nav>
             </div>
@@ -312,8 +313,11 @@
                                 <div class="float-end"  style="margin-bottom: 8%;">
                                     <button class="btn btn-primary" mat-raised-button color="primary"  type="submit">Next</button>
                                 </div>
+                                
                                 </form>
-    
+                                <div class="float-start"  style="margin-bottom: 8%;">
+                                    <button class="btn btn-primary" mat-raised-button color="primary"  (click)="openOtpModal()">Otp-Dialog Test</button>
+                                </div>
                         </fieldset>
                     </div>
                 </section>
@@ -397,8 +401,7 @@
                 </section>
             </div>
         </mat-card>
-        <div class="float-start" style="margin-bottom: 3%;" *ngIf="showAddBank">
-                                    
+        <div class="float-start" style="margin-bottom: 11%;" *ngIf="showAddBank">                         
             <button class="btn btn-secondary " style="margin-bottom: 1%;" mat-raised-button color="secondary" (click)="AddBank()">Add More Bank</button>
         </div>
         <br>
@@ -508,7 +511,7 @@
                 </div>
               
             </mat-card>
-            <div class="float-start" style="margin-bottom: 5%;" >
+            <div class="float-start" style="margin-bottom: 11%;" >
                                     
                 <button class="btn btn-secondary " style="margin-bottom: 1%;" mat-raised-button color="secondary" (click)="AddMember()">Add More Member</button>
             </div>
@@ -523,449 +526,439 @@
            
                 <button class="btn btn-secondary ms-2" mat-raised-button color="secondary" (click)="authenticatePersonDetailSubmit()">Next</button>
             </div>
-        </mat-tab>
+            </mat-tab>
     
            <!--Office Address Details Tab Start -->
            <!-- <mat-tab label="Office Address Details" [disabled]="!basicDetailSubmitted || !baiscDetailForm.valid ||  !bankFormSubmitted || !bankForm.valid || !AuthenticatePersonSubmitted || AuthenticatePersonForm.valid"> -->
-        <mat-tab label="Office Address Details">
-            <mat-card>
-                <div>
-                    <mat-label style="font-weight: 500; font-size: 15px;">Note:  If you have one more office address.</mat-label>
-                </div>
-                <div class="content-wrapper">
-                    <section class="content" >
-                        <div class="light-blue-bg">
-                            <form [formGroup]="OfficeAddressForm" (ngSubmit)="officeAddressDetailSubmit()">            
-                                <fieldset class="p-4" >
-                                    <div formArrayName="OfficeAddressDetails" *ngFor="let OfficeAddressDetail of OfficeAddressForm.get('OfficeAddressDetails').controls; let i = index">
-                                        <ng-container [formGroupName]="i">
-                                        <button type="button" mat-button class="float-end" (click)="RemoveAddress(i)">	
-                                            <mat-icon color="warn" *ngIf="OfficeAddressForm.get('OfficeAddressDetails').controls.length>1">remove_circle</mat-icon>	
-                                        </button>
-                                        <div class="row mt-5" >
-                                            <div>
-                                                <mat-label style="font-weight: 600; font-size: 20px;">Enter Office Address-{{i+1}} Details:</mat-label>
-                                            </div>
+            <mat-tab label="Office Address Details">
+                <mat-card>
+                    <div>
+                        <mat-label style="font-weight: 500; font-size: 15px;">Note:  If you have one more office address.</mat-label>
+                    </div>
+                    <div class="content-wrapper">
+                        <section class="content" >
+                            <div class="light-blue-bg">
+                                <form [formGroup]="OfficeAddressForm" (ngSubmit)="officeAddressDetailSubmit()">            
+                                    <fieldset class="p-4" >
+                                        <div formArrayName="OfficeAddressDetails" *ngFor="let OfficeAddressDetail of OfficeAddressForm.get('OfficeAddressDetails').controls; let i = index">
+                                            <ng-container [formGroupName]="i">
+                                            <button type="button" mat-button class="float-end" (click)="RemoveAddress(i)">	
+                                                <mat-icon color="warn" *ngIf="OfficeAddressForm.get('OfficeAddressDetails').controls.length>1">remove_circle</mat-icon>	
+                                            </button>
+                                            <div class="row mt-5" >
+                                                <div>
+                                                    <mat-label style="font-weight: 600; font-size: 20px;">Enter Office Address-{{i+1}} Details:</mat-label>
+                                                </div>
+                                                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="!isofficeAdd">
+                                                    <mat-form-field class="w-100">
+                                                        <mat-label>State</mat-label>
+                                                        <input matInput type="text" formControlName="state" placeholder="Placeholder">
+                                                    </mat-form-field>
+                                                    <span class="text-danger" *ngIf="OfficeAddressDetail.get('state').errors && OfficeAddressDetail.get('state').hasError('required')">
+                                                        Enter State
+                                                    </span>
+                                                </div>
+                                            
                                             <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="!isofficeAdd">
                                                 <mat-form-field class="w-100">
-                                                    <mat-label>State</mat-label>
-                                                    <input matInput type="text" formControlName="state" placeholder="Placeholder">
+                                                    <mat-label>District</mat-label>
+                                                    <input matInput formControlName="district" type="text" placeholder="Placeholder">
                                                 </mat-form-field>
-                                                <span class="text-danger" *ngIf="OfficeAddressDetail.get('state').errors && OfficeAddressDetail.get('state').hasError('required')">
-                                                    Enter State
+                                                <span class="text-danger" *ngIf="OfficeAddressDetail.get('district').errors && OfficeAddressDetail.get('district').hasError('required')">
+                                                    Enter District
+                                                </span>
+                                            </div> 
+                                            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="!isofficeAdd">
+                                                <mat-form-field class="w-100">
+                                                    <mat-label>Block / Panchayat Samiti</mat-label>
+                                                    <input matInput formControlName="block" type="text" placeholder="Placeholder">
+                                                </mat-form-field>
+                                                <span class="text-danger" *ngIf="OfficeAddressDetail.get('block').errors && OfficeAddressDetail.get('block').hasError('required')">
+                                                    Enter Block / Panchayat Samiti
+                                                </span>
+                                            </div> 
+                                            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="!isofficeAdd">
+                                                <mat-form-field class="w-100">
+                                                    <mat-label>Gram Panchayat</mat-label>
+                                                    <input matInput formControlName="gramPanchayat" type="text" placeholder="Placeholder">
+                                                </mat-form-field>
+                                                <span class="text-danger" *ngIf="OfficeAddressDetail.get('gramPanchayat').errors && OfficeAddressDetail.get('gramPanchayat').hasError('required')">
+                                                    Enter Gram Panchayat
+                                                </span>
+                                            </div> 
+                                            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="!isofficeAdd">
+                                                <mat-form-field class="w-100">
+                                                    <mat-label>Village</mat-label>
+                                                    <input matInput formControlName="village" type="text" placeholder="Placeholder">
+                                                </mat-form-field>
+                                                <span class="text-danger" *ngIf="OfficeAddressDetail.get('village').errors && OfficeAddressDetail.get('village').hasError('required')">
+                                                    Enter Village
+                                                </span>
+                                            </div> 
+                                            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="!isofficeAdd">
+                                                <mat-form-field class="w-100">
+                                                    <mat-label>Full Address</mat-label>
+                                                    <input matInput formControlName="fullAddress"  type="text" placeholder="Placeholder">
+                                                </mat-form-field>
+                                                <span class="text-danger" *ngIf="OfficeAddressDetail.get('fullAddress').errors && OfficeAddressDetail.get('fullAddress').hasError('required')">
+                                                    Enter Full Address
+                                                </span>
+                                            </div> 
+                                            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="!isofficeAdd">
+                                                <mat-form-field class="w-100">
+                                                    <mat-label>Pin code</mat-label>
+                                                    <input matInput formControlName="pinCode" type="text" placeholder="Placeholder">
+                                                </mat-form-field>
+                                                <span class="text-danger" *ngIf="OfficeAddressDetail.get('pinCode').errors && OfficeAddressDetail.get('pinCode').hasError('required')">
+                                                    Enter Pin code
                                                 </span>
                                             </div>
-                                        
-                                        <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="!isofficeAdd">
-                                            <mat-form-field class="w-100">
-                                                <mat-label>District</mat-label>
-                                                <input matInput formControlName="district" type="text" placeholder="Placeholder">
-                                            </mat-form-field>
-                                            <span class="text-danger" *ngIf="OfficeAddressDetail.get('district').errors && OfficeAddressDetail.get('district').hasError('required')">
-                                                Enter District
-                                            </span>
-                                        </div> 
-                                        <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="!isofficeAdd">
-                                            <mat-form-field class="w-100">
-                                                <mat-label>Block / Panchayat Samiti</mat-label>
-                                                <input matInput formControlName="block" type="text" placeholder="Placeholder">
-                                            </mat-form-field>
-                                            <span class="text-danger" *ngIf="OfficeAddressDetail.get('block').errors && OfficeAddressDetail.get('block').hasError('required')">
-                                                Enter Block / Panchayat Samiti
-                                            </span>
-                                        </div> 
-                                        <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="!isofficeAdd">
-                                            <mat-form-field class="w-100">
-                                                <mat-label>Gram Panchayat</mat-label>
-                                                <input matInput formControlName="gramPanchayat" type="text" placeholder="Placeholder">
-                                            </mat-form-field>
-                                            <span class="text-danger" *ngIf="OfficeAddressDetail.get('gramPanchayat').errors && OfficeAddressDetail.get('gramPanchayat').hasError('required')">
-                                                Enter Gram Panchayat
-                                            </span>
-                                        </div> 
-                                        <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="!isofficeAdd">
-                                            <mat-form-field class="w-100">
-                                                <mat-label>Village</mat-label>
-                                                <input matInput formControlName="village" type="text" placeholder="Placeholder">
-                                            </mat-form-field>
-                                            <span class="text-danger" *ngIf="OfficeAddressDetail.get('village').errors && OfficeAddressDetail.get('village').hasError('required')">
-                                                Enter Village
-                                            </span>
-                                        </div> 
-                                        <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="!isofficeAdd">
-                                            <mat-form-field class="w-100">
-                                                <mat-label>Full Address</mat-label>
-                                                <input matInput formControlName="fullAddress"  type="text" placeholder="Placeholder">
-                                            </mat-form-field>
-                                            <span class="text-danger" *ngIf="OfficeAddressDetail.get('fullAddress').errors && OfficeAddressDetail.get('fullAddress').hasError('required')">
-                                                Enter Full Address
-                                            </span>
-                                        </div> 
-                                        <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="!isofficeAdd">
-                                            <mat-form-field class="w-100">
-                                                <mat-label>Pin code</mat-label>
-                                                <input matInput formControlName="pinCode" type="text" placeholder="Placeholder">
-                                            </mat-form-field>
-                                            <span class="text-danger" *ngIf="OfficeAddressDetail.get('pinCode').errors && OfficeAddressDetail.get('pinCode').hasError('required')">
-                                                Enter Pin code
-                                            </span>
+                                            </div>
+                                            </ng-container>
                                         </div>
-                                        </div>
-                                        </ng-container>
-                                    </div>
-                                </fieldset>
-                            </form>
-                        </div>
-                    </section>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </section>
+                    </div>
+                
+                </mat-card>
+                <div class="float-start" style="margin-bottom: 11%;" >                    
+                    <button class="btn btn-secondary " style="margin-bottom: 1%;" mat-raised-button color="secondary" (click)="AddAddress()">Add More Address</button>
                 </div>
-              
-            </mat-card>
-            <div class="float-start" style="margin-bottom: 5%;" >
-                                    
-                <button class="btn btn-secondary " style="margin-bottom: 1%;" mat-raised-button color="secondary" (click)="AddAddress()">Add More Address</button>
-            </div>
-            <br>
-            <br>
-            <br>
-            <div class="float-start"style="margin-left: -11%;margin-bottom: 5%;">
-                <button class="btn btn-primary" mat-raised-button color="primary" (click)="previousStep()">Previous</button>
-               
-            </div>
-            <div class="float-end">
-               
-                <button class="btn btn-secondary ms-2" mat-raised-button color="secondary" (click)="FinalSubmit()">Next</button>
-            </div>
-        </mat-tab>
-        </mat-tab-group>
-    
-    
-    
+                <br>
+                <br>
+                <br>
+                <div class="float-start"style="margin-left: -11%;margin-bottom: 5%;">
+                    <button class="btn btn-primary" mat-raised-button color="primary" (click)="previousStep()">Previous</button>
+                </div>
+                <div class="float-end">
+                    <button class="btn btn-secondary ms-2" mat-raised-button color="secondary" (click)="FinalSubmit()">Next</button>
+                </div>
+            </mat-tab>
+        </mat-tab-group> 
         <div class="content-wrapper">
-          
-        <section class="content" *ngIf="payeeType=='z'">
-            <div class="light-blue-bg">            
-                <fieldset class="p-4">
-                    <legend>
-                        <label class="">
-                            <div class="section-title">
-                                <h2>Vendor Registration Details</h2>
-                            </div>
-                        </label>                    
-                    </legend>
-                        <form >
-                            <!-- 1 -->
-                            
-                            <div class="row mt-5">   
-                                
-                                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4">
-                                    <mat-form-field class="w-100">
-                                        <mat-label>First Name</mat-label>
-                                        <input matInput placeholder="Placeholder">
-                                       
-                                      </mat-form-field>
+            <section class="content" *ngIf="payeeType=='z'">
+                <div class="light-blue-bg">            
+                    <fieldset class="p-4">
+                        <legend>
+                            <label class="">
+                                <div class="section-title">
+                                    <h2>Vendor Registration Details</h2>
                                 </div>
-                                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4">
-                                    <mat-form-field class="w-100">
-                                        <mat-label>Last Name</mat-label>
-                                        <input matInput placeholder="Placeholder">
+                            </label>                    
+                        </legend>
+                            <form >
+                                <!-- 1 -->
+                                
+                                <div class="row mt-5">   
+                                    
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4">
+                                        <mat-form-field class="w-100">
+                                            <mat-label>First Name</mat-label>
+                                            <input matInput placeholder="Placeholder">
                                         
-                                      </mat-form-field>
-                                </div>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4">
+                                        <mat-form-field class="w-100">
+                                            <mat-label>Last Name</mat-label>
+                                            <input matInput placeholder="Placeholder">
+                                            
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4">
+                                        <mat-form-field  class="w-100">
+                                        <mat-label class="dateLable">Date of Birth</mat-label>
+                                    
+                                        <input matInput class="dateinput" [matDatepicker]="picker">
+                                    
+                                        <mat-datepicker-toggle matIconSuffix [for]="picker" ></mat-datepicker-toggle>
+                                        <mat-datepicker  #picker></mat-datepicker>
+                                    </mat-form-field>
+                                
+                                    </div>
+                                
+                                
+                                
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4">
+                                        <mat-form-field class="w-100">
+                                            <mat-label>Telephone No.</mat-label>
+                                            <input matInput type="number" placeholder="Placeholder">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4">
+                                        <mat-form-field class="w-100">
+                                            <mat-label>Post Address (Permanent Address) </mat-label>
+                                            <input matInput type="text" placeholder="Placeholder">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4">
+                                        <mat-form-field class="w-100">
+                                            <mat-label>Postal code</mat-label>
+                                            <input matInput type="number" placeholder="Placeholder">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4">
+                                        <mat-form-field class="w-100">
+                                            <mat-label>State</mat-label>
+                                            <input matInput type="text" placeholder="Placeholder">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4">
+                                        <mat-form-field class="w-100">
+                                            <mat-label>City/District</mat-label>
+                                            <input matInput type="text" placeholder="Placeholder">
+                                        </mat-form-field>
+                                    </div>                                                
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4">
+                                        <mat-form-field  class="w-100">
+                                        <mat-label>Registration Type</mat-label>
+                                        <select matNativeControl required>
+                                            <option value="employeeType-1">New</option>
+                                            <option value="employeeType-2">Existing</option>
+                                        </select>
+                                    
+                                        </mat-form-field>
+                                        
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4">
+                                        <mat-form-field  class="w-100">
+                                        <mat-label>NRI</mat-label>
+                                        <select matNativeControl required (change)="nriChange()" [(ngModel)]="nri" [ngModelOptions]="{standalone: true}">
+                                            <option value="Yes">Yes</option>
+                                            <option value="No">No</option>
+                                        </select>
+                                    
+                                        </mat-form-field>
+                                        
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="isNri">
+                                        <mat-form-field class="w-100">
+                                            <mat-label>Passport No.</mat-label>
+                                            <input matInput type="text" placeholder="Placeholder">
+                                        </mat-form-field>
+                                    </div>  
+                                
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4">
+                                        <mat-form-field  class="w-100">
+                                        <mat-label>Whether Registered  office of Vendor is same as permanent address?</mat-label>
+                                        <select matNativeControl require (change)="officeAddressChange()" [(ngModel)]="officeAdd" [ngModelOptions]="{standalone: true}">
+                                            <option value="Yes">Yes</option>
+                                            <option value="No">No</option>
+                                        </select>
+                                    
+                                        </mat-form-field>
+                                        
+                                    </div>  
+                                    
                                 <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4">
                                     <mat-form-field  class="w-100">
-                                     <mat-label class="dateLable">Date of Birth</mat-label>
-                                   
-                                    <input matInput class="dateinput" [matDatepicker]="picker">
-                                   
-                                    <mat-datepicker-toggle matIconSuffix [for]="picker" ></mat-datepicker-toggle>
-                                    <mat-datepicker  #picker></mat-datepicker>
-                                </mat-form-field>
-                               
-                                </div>
-                              
-                              
-                              
-                                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4">
-                                    <mat-form-field class="w-100">
-                                        <mat-label>Telephone No.</mat-label>
-                                        <input matInput type="number" placeholder="Placeholder">
-                                      </mat-form-field>
-                                </div>
-                                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4">
-                                    <mat-form-field class="w-100">
-                                        <mat-label>Post Address (Permanent Address) </mat-label>
-                                        <input matInput type="text" placeholder="Placeholder">
-                                      </mat-form-field>
-                                </div>
-                                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4">
-                                    <mat-form-field class="w-100">
-                                        <mat-label>Postal code</mat-label>
-                                        <input matInput type="number" placeholder="Placeholder">
-                                      </mat-form-field>
-                                </div>
-                                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4">
-                                    <mat-form-field class="w-100">
-                                        <mat-label>State</mat-label>
-                                        <input matInput type="text" placeholder="Placeholder">
-                                      </mat-form-field>
-                                </div>
-                                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4">
-                                    <mat-form-field class="w-100">
-                                        <mat-label>City/District</mat-label>
-                                        <input matInput type="text" placeholder="Placeholder">
-                                      </mat-form-field>
-                                </div>                                                
-                                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4">
-                                    <mat-form-field  class="w-100">
-                                    <mat-label>Registration Type</mat-label>
-                                    <select matNativeControl required>
-                                        <option value="employeeType-1">New</option>
-                                        <option value="employeeType-2">Existing</option>
+                                    <mat-label>Vendor Type</mat-label>
+                                    <select matNativeControl require  [(ngModel)]="VendorType" [ngModelOptions]="{standalone: true}">
+                                        <option value="Individual">Individual</option>
+                                        <option value="Organization">Organization</option>
                                     </select>
-                                  
+                                
                                     </mat-form-field>
                                     
-                                </div>
-                                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4">
-                                    <mat-form-field  class="w-100">
-                                    <mat-label>NRI</mat-label>
-                                    <select matNativeControl required (change)="nriChange()" [(ngModel)]="nri" [ngModelOptions]="{standalone: true}">
-                                        <option value="Yes">Yes</option>
-                                        <option value="No">No</option>
-                                    </select>
-                                  
-                                    </mat-form-field>
-                                    
-                                </div>
-                                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="isNri">
-                                    <mat-form-field class="w-100">
-                                        <mat-label>Passport No.</mat-label>
-                                        <input matInput type="text" placeholder="Placeholder">
-                                      </mat-form-field>
                                 </div>  
-                               
-                                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4">
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="VendorType=='Individual'">
                                     <mat-form-field  class="w-100">
-                                    <mat-label>Whether Registered  office of Vendor is same as permanent address?</mat-label>
-                                    <select matNativeControl require (change)="officeAddressChange()" [(ngModel)]="officeAdd" [ngModelOptions]="{standalone: true}">
-                                        <option value="Yes">Yes</option>
-                                        <option value="No">No</option>
+                                    <mat-label>Vendor Sub-Type</mat-label>
+                                    <select matNativeControl require  [(ngModel)]="SubType" [ngModelOptions]="{standalone: true}">
+                                        <option value="Vendor">Vendor</option>
+                                        <option value="ServiceProvider">Service Provider</option>
+                                        <option value="Consultant">Consultant</option>
+                                        <option value="Contractor">Contractor</option>
                                     </select>
-                                  
+                                
                                     </mat-form-field>
                                     
                                 </div>  
-                                 
-                            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4">
-                                <mat-form-field  class="w-100">
-                                <mat-label>Vendor Type</mat-label>
-                                <select matNativeControl require  [(ngModel)]="VendorType" [ngModelOptions]="{standalone: true}">
-                                    <option value="Individual">Individual</option>
-                                    <option value="Organization">Organization</option>
-                                </select>
-                              
-                                </mat-form-field>
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4"  *ngIf="VendorType=='Organization'">
+                                    <mat-form-field  class="w-100">
+                                    <mat-label>Vendor Sub-Type</mat-label>
+                                    <select matNativeControl require  [(ngModel)]="SubType" [ngModelOptions]="{standalone: true}">
+                                        <option value="Private">Private</option>
+                                        <option value="Autonomous">Autonomous</option>
+                                        <option value="SNAholder">SNA holder</option>
+                                        <option value="Institution">Institution</option>
+                                        <option value="Society">Society</option>
+                                        <option value="Board">Board</option>
+                                        <option value="GovernmentStateCentral">Government (State/Central)</option>
+                                        <option value="GovernmentDepartment">Government Department</option>
+                                        <option value="OtherStateGovernment ">Other State Government </option>
+                                        <option value="JointVenture">Joint Venture</option>
+                                        <option value="Consortium">Consortium</option>
+                                    </select>
                                 
-                            </div>  
-                            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="VendorType=='Individual'">
-                                <mat-form-field  class="w-100">
-                                <mat-label>Vendor Sub-Type</mat-label>
-                                <select matNativeControl require  [(ngModel)]="SubType" [ngModelOptions]="{standalone: true}">
-                                    <option value="Vendor">Vendor</option>
-                                    <option value="ServiceProvider">Service Provider</option>
-                                    <option value="Consultant">Consultant</option>
-                                    <option value="Contractor">Contractor</option>
-                                </select>
-                              
-                                </mat-form-field>
+                                    </mat-form-field>
+                                    
+                                </div>  
+        
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="VendorType=='Individual'">
+                                    <mat-form-field  class="w-100">
+                                    <mat-label>Individual Vendor Type</mat-label>
+                                    <select matNativeControl require  [(ngModel)]="InVenType" [ngModelOptions]="{standalone: true}">
+                                        <option value="State">State</option>
+                                        <option value="Division">Division</option>
+                                        <option value="District">District</option>
+                                        <option value="SubDistrict">Sub-District</option>                               
+                                    </select>
                                 
-                            </div>  
-                            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4"  *ngIf="VendorType=='Organization'">
-                                <mat-form-field  class="w-100">
-                                <mat-label>Vendor Sub-Type</mat-label>
-                                <select matNativeControl require  [(ngModel)]="SubType" [ngModelOptions]="{standalone: true}">
-                                    <option value="Private">Private</option>
-                                    <option value="Autonomous">Autonomous</option>
-                                    <option value="SNAholder">SNA holder</option>
-                                    <option value="Institution">Institution</option>
-                                    <option value="Society">Society</option>
-                                    <option value="Board">Board</option>
-                                    <option value="GovernmentStateCentral">Government (State/Central)</option>
-                                    <option value="GovernmentDepartment">Government Department</option>
-                                    <option value="OtherStateGovernment ">Other State Government </option>
-                                    <option value="JointVenture">Joint Venture</option>
-                                    <option value="Consortium">Consortium</option>
-                                </select>
-                              
-                                </mat-form-field>
-                                
-                            </div>  
-    
-                            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="VendorType=='Individual'">
-                                <mat-form-field  class="w-100">
-                                <mat-label>Individual Vendor Type</mat-label>
-                                <select matNativeControl require  [(ngModel)]="InVenType" [ngModelOptions]="{standalone: true}">
-                                    <option value="State">State</option>
-                                    <option value="Division">Division</option>
-                                    <option value="District">District</option>
-                                    <option value="SubDistrict">Sub-District</option>                               
-                                </select>
-                              
-                                </mat-form-field>
-                                
-                            </div>  
-    
-                            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="VendorType=='Individual' && InVenType=='State' ">
-                                <mat-form-field  class="w-100">
-                                <mat-label>Select Department</mat-label>
-                                <select matNativeControl require  [(ngModel)]="IndiDepartment" [ngModelOptions]="{standalone: true}">
-                                    <option value="1">##</option>
-                                    <option value="2">##</option>                                                           
-                                </select>                          
-                                </mat-form-field>                            
-                            </div>  
-                            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="VendorType=='Individual' && InVenType=='State' ">
-                                <mat-form-field  class="w-100">
-                                <mat-label>Select Office</mat-label>
-                                <select matNativeControl require  [(ngModel)]="IndiOffice" [ngModelOptions]="{standalone: true}">
-                                    <option value="1">##</option>
-                                    <option value="2">##</option>                                                           
-                                </select>                          
-                                </mat-form-field>                            
-                            </div>  
-    
-                            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="VendorType=='Individual' && InVenType=='Division' ">
-                                <mat-form-field  class="w-100">
-                                <mat-label>Select Division</mat-label>
-                                <select matNativeControl require  [(ngModel)]="IndiDivision" [ngModelOptions]="{standalone: true}">
-                                    <option value="1">##</option>
-                                    <option value="2">##</option>                                                           
-                                </select>                          
-                                </mat-form-field>                            
-                            </div>  
-                            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="VendorType=='Individual' && InVenType=='Division' ">
-                                <mat-form-field  class="w-100">
-                                <mat-label>Select Department</mat-label>
-                                <select matNativeControl require  [(ngModel)]="IndiDepartment" [ngModelOptions]="{standalone: true}">
-                                    <option value="1">##</option>
-                                    <option value="2">##</option>                                                           
-                                </select>                          
-                                </mat-form-field>                            
-                            </div>  
-                            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="VendorType=='Individual' && InVenType=='Division' ">
-                                <mat-form-field  class="w-100">
-                                <mat-label>Select Office</mat-label>
-                                <select matNativeControl require  [(ngModel)]="IndiOffice" [ngModelOptions]="{standalone: true}">
-                                    <option value="1">##</option>
-                                    <option value="2">##</option>                                                           
-                                </select>                          
-                                </mat-form-field>                            
-                            </div>  
-    
-                            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="VendorType=='Individual' && InVenType=='District' ">
-                                <mat-form-field  class="w-100">
-                                <mat-label>Select Division</mat-label>
-                                <select matNativeControl require  [(ngModel)]="IndiDivision" [ngModelOptions]="{standalone: true}">
-                                    <option value="1">##</option>
-                                    <option value="2">##</option>                                                           
-                                </select>                          
-                                </mat-form-field>                            
-                            </div>  
-                            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="VendorType=='Individual' && InVenType=='District' ">
-                                <mat-form-field  class="w-100">
-                                <mat-label>Select District</mat-label>
-                                <select matNativeControl require  [(ngModel)]="IndiDistrict" [ngModelOptions]="{standalone: true}">
-                                    <option value="1">##</option>
-                                    <option value="2">##</option>                                                           
-                                </select>                          
-                                </mat-form-field>                            
-                            </div>  
-                           
-                            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="VendorType=='Individual' && InVenType=='District' ">
-                                <mat-form-field  class="w-100">
-                                <mat-label>Select Department</mat-label>
-                                <select matNativeControl require  [(ngModel)]="IndiDepartment" [ngModelOptions]="{standalone: true}">
-                                    <option value="1">##</option>
-                                    <option value="2">##</option>                                                           
-                                </select>                          
-                                </mat-form-field>                            
-                            </div>  
-                            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="VendorType=='Individual' && InVenType=='District' ">
-                                <mat-form-field  class="w-100">
-                                <mat-label>Select Office</mat-label>
-                                <select matNativeControl require  [(ngModel)]="IndiOffice" [ngModelOptions]="{standalone: true}">
-                                    <option value="1">##</option>
-                                    <option value="2">##</option>                                                           
-                                </select>                          
-                                </mat-form-field>                            
-                            </div>  
-    
-                            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="VendorType=='Individual' && InVenType=='SubDistrict' ">
-                                <mat-form-field  class="w-100">
-                                <mat-label>Select Division</mat-label>
-                                <select matNativeControl require  [(ngModel)]="IndiDivision" [ngModelOptions]="{standalone: true}">
-                                    <option value="1">##</option>
-                                    <option value="2">##</option>                                                           
-                                </select>                          
-                                </mat-form-field>                            
-                            </div>  
-                            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="VendorType=='Individual' && InVenType=='SubDistrict' ">
-                                <mat-form-field  class="w-100">
-                                <mat-label>Select District</mat-label>
-                                <select matNativeControl require  [(ngModel)]="IndiDistrict" [ngModelOptions]="{standalone: true}">
-                                    <option value="1">##</option>
-                                    <option value="2">##</option>                                                           
-                                </select>                          
-                                </mat-form-field>                            
-                            </div>  
-                            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="VendorType=='Individual' && InVenType=='SubDistrict' ">
-                                <mat-form-field  class="w-100">
-                                <mat-label>Select Sub-District</mat-label>
-                                <select matNativeControl require  [(ngModel)]="IndiSubDistrict" [ngModelOptions]="{standalone: true}">
-                                    <option value="1">##</option>
-                                    <option value="2">##</option>                                                           
-                                </select>                          
-                                </mat-form-field>                            
-                            </div>  
-    
-                            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="VendorType=='Individual' && InVenType=='SubDistrict' ">
-                                <mat-form-field  class="w-100">
-                                <mat-label>Select Department</mat-label>
-                                <select matNativeControl require  [(ngModel)]="IndiDepartment" [ngModelOptions]="{standalone: true}">
-                                    <option value="1">##</option>
-                                    <option value="2">##</option>                                                           
-                                </select>                          
-                                </mat-form-field>                            
-                            </div>  
-                            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="VendorType=='Individual' && InVenType=='SubDistrict' ">
-                                <mat-form-field  class="w-100">
-                                <mat-label>Select Office</mat-label>
-                                <select matNativeControl require  [(ngModel)]="IndiOffice" [ngModelOptions]="{standalone: true}">
-                                    <option value="1">##</option>
-                                    <option value="2">##</option>                                                           
-                                </select>                          
-                                </mat-form-field>                            
-                            </div>  
-    
-                                             
-                            <div style="color:#231e60;margin-left: 3%;">
-                                <mat-checkbox style=" margin-bottom: 2%;" color="primary">I hereby declare that information furnished by me is true and correct as per my knowledge.If the same is found incorrect during later stages of verification then my application is liable to be rejected.</mat-checkbox>
-                                <mat-checkbox color="primary">I further agree to share my Jan-Aadhaar data like personal details including bank details with Department of Finance &RISL.</mat-checkbox>
+                                    </mat-form-field>
+                                    
+                                </div>  
+        
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="VendorType=='Individual' && InVenType=='State' ">
+                                    <mat-form-field  class="w-100">
+                                    <mat-label>Select Department</mat-label>
+                                    <select matNativeControl require  [(ngModel)]="IndiDepartment" [ngModelOptions]="{standalone: true}">
+                                        <option value="1">##</option>
+                                        <option value="2">##</option>                                                           
+                                    </select>                          
+                                    </mat-form-field>                            
+                                </div>  
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="VendorType=='Individual' && InVenType=='State' ">
+                                    <mat-form-field  class="w-100">
+                                    <mat-label>Select Office</mat-label>
+                                    <select matNativeControl require  [(ngModel)]="IndiOffice" [ngModelOptions]="{standalone: true}">
+                                        <option value="1">##</option>
+                                        <option value="2">##</option>                                                           
+                                    </select>                          
+                                    </mat-form-field>                            
+                                </div>  
+        
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="VendorType=='Individual' && InVenType=='Division' ">
+                                    <mat-form-field  class="w-100">
+                                    <mat-label>Select Division</mat-label>
+                                    <select matNativeControl require  [(ngModel)]="IndiDivision" [ngModelOptions]="{standalone: true}">
+                                        <option value="1">##</option>
+                                        <option value="2">##</option>                                                           
+                                    </select>                          
+                                    </mat-form-field>                            
+                                </div>  
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="VendorType=='Individual' && InVenType=='Division' ">
+                                    <mat-form-field  class="w-100">
+                                    <mat-label>Select Department</mat-label>
+                                    <select matNativeControl require  [(ngModel)]="IndiDepartment" [ngModelOptions]="{standalone: true}">
+                                        <option value="1">##</option>
+                                        <option value="2">##</option>                                                           
+                                    </select>                          
+                                    </mat-form-field>                            
+                                </div>  
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="VendorType=='Individual' && InVenType=='Division' ">
+                                    <mat-form-field  class="w-100">
+                                    <mat-label>Select Office</mat-label>
+                                    <select matNativeControl require  [(ngModel)]="IndiOffice" [ngModelOptions]="{standalone: true}">
+                                        <option value="1">##</option>
+                                        <option value="2">##</option>                                                           
+                                    </select>                          
+                                    </mat-form-field>                            
+                                </div>  
+        
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="VendorType=='Individual' && InVenType=='District' ">
+                                    <mat-form-field  class="w-100">
+                                    <mat-label>Select Division</mat-label>
+                                    <select matNativeControl require  [(ngModel)]="IndiDivision" [ngModelOptions]="{standalone: true}">
+                                        <option value="1">##</option>
+                                        <option value="2">##</option>                                                           
+                                    </select>                          
+                                    </mat-form-field>                            
+                                </div>  
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="VendorType=='Individual' && InVenType=='District' ">
+                                    <mat-form-field  class="w-100">
+                                    <mat-label>Select District</mat-label>
+                                    <select matNativeControl require  [(ngModel)]="IndiDistrict" [ngModelOptions]="{standalone: true}">
+                                        <option value="1">##</option>
+                                        <option value="2">##</option>                                                           
+                                    </select>                          
+                                    </mat-form-field>                            
+                                </div>  
+                            
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="VendorType=='Individual' && InVenType=='District' ">
+                                    <mat-form-field  class="w-100">
+                                    <mat-label>Select Department</mat-label>
+                                    <select matNativeControl require  [(ngModel)]="IndiDepartment" [ngModelOptions]="{standalone: true}">
+                                        <option value="1">##</option>
+                                        <option value="2">##</option>                                                           
+                                    </select>                          
+                                    </mat-form-field>                            
+                                </div>  
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="VendorType=='Individual' && InVenType=='District' ">
+                                    <mat-form-field  class="w-100">
+                                    <mat-label>Select Office</mat-label>
+                                    <select matNativeControl require  [(ngModel)]="IndiOffice" [ngModelOptions]="{standalone: true}">
+                                        <option value="1">##</option>
+                                        <option value="2">##</option>                                                           
+                                    </select>                          
+                                    </mat-form-field>                            
+                                </div>  
+        
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="VendorType=='Individual' && InVenType=='SubDistrict' ">
+                                    <mat-form-field  class="w-100">
+                                    <mat-label>Select Division</mat-label>
+                                    <select matNativeControl require  [(ngModel)]="IndiDivision" [ngModelOptions]="{standalone: true}">
+                                        <option value="1">##</option>
+                                        <option value="2">##</option>                                                           
+                                    </select>                          
+                                    </mat-form-field>                            
+                                </div>  
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="VendorType=='Individual' && InVenType=='SubDistrict' ">
+                                    <mat-form-field  class="w-100">
+                                    <mat-label>Select District</mat-label>
+                                    <select matNativeControl require  [(ngModel)]="IndiDistrict" [ngModelOptions]="{standalone: true}">
+                                        <option value="1">##</option>
+                                        <option value="2">##</option>                                                           
+                                    </select>                          
+                                    </mat-form-field>                            
+                                </div>  
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="VendorType=='Individual' && InVenType=='SubDistrict' ">
+                                    <mat-form-field  class="w-100">
+                                    <mat-label>Select Sub-District</mat-label>
+                                    <select matNativeControl require  [(ngModel)]="IndiSubDistrict" [ngModelOptions]="{standalone: true}">
+                                        <option value="1">##</option>
+                                        <option value="2">##</option>                                                           
+                                    </select>                          
+                                    </mat-form-field>                            
+                                </div>  
+        
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="VendorType=='Individual' && InVenType=='SubDistrict' ">
+                                    <mat-form-field  class="w-100">
+                                    <mat-label>Select Department</mat-label>
+                                    <select matNativeControl require  [(ngModel)]="IndiDepartment" [ngModelOptions]="{standalone: true}">
+                                        <option value="1">##</option>
+                                        <option value="2">##</option>                                                           
+                                    </select>                          
+                                    </mat-form-field>                            
+                                </div>  
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4" *ngIf="VendorType=='Individual' && InVenType=='SubDistrict' ">
+                                    <mat-form-field  class="w-100">
+                                    <mat-label>Select Office</mat-label>
+                                    <select matNativeControl require  [(ngModel)]="IndiOffice" [ngModelOptions]="{standalone: true}">
+                                        <option value="1">##</option>
+                                        <option value="2">##</option>                                                           
+                                    </select>                          
+                                    </mat-form-field>                            
+                                </div>  
+        
+                                                
+                                <div style="color:#231e60;margin-left: 3%;">
+                                    <mat-checkbox style=" margin-bottom: 2%;" color="primary">I hereby declare that information furnished by me is true and correct as per my knowledge.If the same is found incorrect during later stages of verification then my application is liable to be rejected.</mat-checkbox>
+                                    <mat-checkbox color="primary">I further agree to share my Jan-Aadhaar data like personal details including bank details with Department of Finance &RISL.</mat-checkbox>
+                                </div>
                             </div>
-                        </div>
-                        
-                        </form>
-                        <div class="float-end" >
-                            <button class="btn btn-primary" mat-raised-button color="primary" (click)="FinalSubmit()">Submit</button>
-                           
-                        </div>
+                            
+                            </form>
+                            <div class="float-end" >
+                                <button class="btn btn-primary" mat-raised-button color="primary" (click)="FinalSubmit()">Submit</button>
+                            
+                            </div>
                     </fieldset>
                 </div>
-                
-            
-        </section>
-    </div>
-    
+            </section>
+        </div>
     </div>
     
     <script>

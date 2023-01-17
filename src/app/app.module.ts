@@ -6,11 +6,14 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 
-// custom Modules
+// ng package Modules
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule ,FormsModule} from '@angular/forms';
-import {MatTabsModule} from '@angular/material/tabs';
+import { NgOtpInputModule } from  'ng-otp-input';
+
+// custom Modules
 import { MatComponentsModule } from './modules/mat-module.module';
+import { SharedModule } from './shared/shared.module';
 
 
 import { AccessDeniedComponent } from './components/access-denied/access-denied.component';
@@ -21,14 +24,11 @@ import { AttachfileComponent } from './components/attachfile/attachfile.componen
 import { EmployeeServiceDetailsComponent } from './components/employee-service-details/employee-service-details.component';
 import { SteperComponent } from './components/steper/steper.component';
 // import { SearchdropdownComponent } from './searchdropdown/searchdropdown.component';
-import {MatNativeDateModule} from '@angular/material/core';
-import { MatMomentDateModule } from "@angular/material-moment-adapter";
 import { MuliselectautocopleteComponent } from './components/muliselectautocoplete/muliselectautocoplete.component';
 import { FormComponent } from './components/form/form.component';
 import { DialogContentExampleDialogComponent } from './components/dialog-content-example-dialog/dialog-content-example-dialog.component';
 import { VendorRegistrationComponent } from './components/vendor-registration/vendor-registration.component';
 import { SsoLoginComponent } from './components/sso-login/sso-login.component';
-import { VendorSubmitDialogComponent } from './vendor-submit-dialog/vendor-submit-dialog.component';
 // import { PayeeRegistrationComponent } from './components/payee-registration/payee-registration.component';
 import { UserRequestComponent } from './components/user-request/user-request.component';
 // import { PayeeDashboardComponent } from './components/payee-dashboard/payee-dashboard.component';
@@ -62,7 +62,6 @@ RegistrationLayoutComponent
     DialogContentExampleDialogComponent,
     VendorRegistrationComponent,
     SsoLoginComponent,
-    VendorSubmitDialogComponent,
     // PayeeRegistrationComponent,
     UserRequestComponent,
     // PayeeDashboardComponent,
@@ -73,20 +72,21 @@ RegistrationLayoutComponent
     HeaderComponent,
     FooterComponent,
     TogglesidemenuComponent,
-    DatatableComponent
+    DatatableComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule,
     BrowserAnimationsModule,
+    HttpClientModule,
+    
+    NgbModule,
     ReactiveFormsModule,
     FormsModule,
-    MatNativeDateModule,
-    MatMomentDateModule,
+    NgOtpInputModule,
+
     MatComponentsModule,
-    MatTabsModule,
-    HttpClientModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
