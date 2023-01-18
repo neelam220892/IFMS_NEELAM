@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { UserSessions } from 'src/app/model/user';
 import { MatDialog } from '@angular/material/dialog';
@@ -15,7 +16,7 @@ import { OtpWindowComponent } from '../../shared/otp-window/otp-window.component
   styleUrls: ['./payee-registration.component.css']
 })
 export class PayeeRegistrationComponent implements OnInit {
-
+  displayedRows:any = [];
   nri:any="No";
   isNri:boolean=false;
   officeAdd:any;
@@ -54,6 +55,7 @@ export class PayeeRegistrationComponent implements OnInit {
   incrementNumber: number = 1;
   currentUser : UserSessions = new UserSessions();
   config: AppConfig = new AppConfig();
+  form=new FormArray([])
   constructor(public dialog: MatDialog,private fb: FormBuilder,private EncrDecr: EncrDecrService, private router:Router ) {
 
         // Basic Details Validations
@@ -143,6 +145,70 @@ export class PayeeRegistrationComponent implements OnInit {
     
     document.getElementById("sidebar")!.style.display = "block";
     console.log(this.payeeType, this.VendorType)
+
+
+    this.displayedRows = [
+      {
+        vesselId : '',
+        vesselName : '',
+        ircs : '',
+        countryCode : '',
+        vesselStatus : '',
+        grossTonnage : '',
+        hullNumber : '',
+        vesselType : '',
+        jonesActEligible :'',
+        disabledDate :'',
+      },
+      {
+        vesselId : '',
+        vesselName : '',
+        ircs : '',
+        countryCode : '',
+        vesselStatus : '',
+        grossTonnage : '',
+        hullNumber : '',
+        vesselType : '',
+        jonesActEligible :'',
+        disabledDate :'',
+      },
+      {
+        vesselId : '',
+        vesselName : '',
+        ircs : '',
+        countryCode : '',
+        vesselStatus : '',
+        grossTonnage : '',
+        hullNumber : '',
+        vesselType : '',
+        jonesActEligible :'',
+        disabledDate :'',
+      },
+      {
+        vesselId : '',
+        vesselName : '',
+        ircs : '',
+        countryCode : '',
+        vesselStatus : '',
+        grossTonnage : '',
+        hullNumber : '',
+        vesselType : '',
+        jonesActEligible :'',
+        disabledDate :'',
+      },
+      {
+        vesselId : '',
+        vesselName : '',
+        ircs : '',
+        countryCode : '',
+        vesselStatus : '',
+        grossTonnage : '',
+        hullNumber : '',
+        vesselType : '',
+        jonesActEligible :'',
+        disabledDate :'',
+      }
+    ]
 
   }
 
@@ -366,7 +432,24 @@ public previousStep() {
   }
   openOtpModal() {
     // this.display = "block";
-    const dialogRef = this.dialog.open(OtpWindowComponent,{ panelClass: 'dialog-w-30'});
+    const dialogRef = this.dialog.open(OtpWindowComponent,{ 
+      panelClass: 'dialog-w-30',
+      data: { name: 'test', id: '12345' }
+    });
     return dialogRef.afterClosed();
   }
 }
+
+
+// export interface ShipData {
+//   vesselId: string;
+//   vesselName: string;
+//   ircs?: string;
+//   countryCode: string;
+//   vesselStatus: string;
+//   grossTonnage?: number;
+//   hullNumber?: string;
+//   vesselType: string;
+//   jonesActEligible: boolean;
+//   disabledDate?: string;
+// }
